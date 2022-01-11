@@ -4,8 +4,8 @@ Cryptocurrency exchange that lets you buy and sell cryptocurrencies at a fixed p
 
 ## Dependencies
 
-- [node]('https://nodejs.org')
-- [Ganache]('https://www.trufflesuite.com/ganache')
+- [node](https://nodejs.org)
+- [Ganache](https://www.trufflesuite.com/ganache)
 - [Truffle]
 
 ```sh
