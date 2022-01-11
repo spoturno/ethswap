@@ -10,13 +10,13 @@ function tokens(n){
 }
 
 contract('EthSwap', ([deployer, investor]) => {
-    let token, ethswap;
+    let token, ethSwap;
 
     before(async () => {
         token = await Token.new();
         ethSwap = await EthSwap.new();
         //transfer all tokens to EthSwap (1 million)
-        await token.transfer(ehtSwap.adress, tokens('1000000'));
+        await token.transfer(ethSwap.address, tokens('1000000'));
     })
 
     describe('Token deployment', async () => {
@@ -25,4 +25,41 @@ contract('EthSwap', ([deployer, investor]) => {
             assert.equal(name, 'MATE Token')
         })
     })
+
+    describe('EthSwap deployment', async () => {
+        it('contract has a name', async () => {
+            const name = await ethSwap.name()
+            assert.equal(name, 'EthSwap Instant Exchange')
+        })
+
+        it('contract has tokens', async () => {
+            let balance = await token.balanceOf(ethSwap.address);
+            assert.equal(balance.toString(), tokens('1000000'))
+        })
+    })
+
+
+    /*
+    describe('buyTokens()', async () => {
+        let result;
+
+        before(async () => {
+            //purchase tokens before each example
+            result = await ethSwap.buyTokens({ from: investor, value: web3.utils.toWei('1', 'ether')});
+        })
+
+        it('Allows user to instantly purchase tokens from ethSwap for a fixed price', async () =>{
+            //check investor token balance after purchase
+            let inverstorBalance = await token.balanceOf(investor);
+            assert.equal(inverstorBalance.toString(), tokens('100'));
+
+            // Check ethSwap balance after purchase
+            let ethSwapBalance;
+            ethSwapBalance = await token.balanceOf(ethSwap.address);
+
+
+        })
+
+    })
+    */
 })
